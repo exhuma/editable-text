@@ -1,9 +1,21 @@
-import { html, LitElement } from "lit";
+import { css, html, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { ref, createRef, Ref } from 'lit/directives/ref.js';
 
 @customElement('editable-text')
 class EditableText extends LitElement {
+
+    static styles = css`
+    A {
+        text-decoration: underline;
+        color: #00f;
+    }
+    .clickable {
+        cursor: pointer;
+    }
+    `;
+
+
     @property()
     value = ""
 
@@ -40,13 +52,13 @@ class EditableText extends LitElement {
         if (this._editing) {
             return html`
             <input ${ref(this.inputRef)} type="text" value="${this.value}" />
-            <a @click="${this._commitEdit}">commit</a>
-            <a @click="${this._cancelEdit}">cancel</a>
+            <slot class="clickable" name="commitButton" @click="${this._commitEdit}"><a>commit</a></slot>
+            <slot class="clickable" name="cancelButton" @click="${this._cancelEdit}"><a>cancel</a></slot>
             `
         }
         return html`
         <span>${this.value}</span>
-        <a @click="${this._startEditing}">edit</a>
+        <slot class="clickable" name="editButton" @click="${this._startEditing}"><a>edit</a></slot>
         `
     }
 }
