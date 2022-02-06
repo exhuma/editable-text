@@ -8,9 +8,12 @@
 
 <body>
 
-    <editable-text></editable-text>
+    <editable-text id="MyElement" value="original-text"></editable-text>
     <script type="module">
         import './dist/editable-text.js';
+        document.getElementById("MyElement").addEventListener(
+            "change", e => console.log(e)
+        );
     </script>
 
 </body>
