@@ -5,10 +5,12 @@ import { ref, createRef, Ref } from 'lit/directives/ref.js';
 @customElement('editable-text')
 class EditableText extends LitElement {
     @property()
-    value: string = ""
+    value = ""
 
     @state()
     _editing = false;
+
+    _oldValue = ""
 
     inputRef: Ref<HTMLInputElement> = createRef()
 
@@ -26,7 +28,12 @@ class EditableText extends LitElement {
         }
         this.value = this.inputRef.value.value;
         this._editing = false;
-        this.dispatchEvent(new CustomEvent("change", { detail: { newValue: this.value } }));
+        this.dispatchEvent(new CustomEvent("change", { detail: { newValue: this.value, oldValue: this._oldValue } }));
+        this._oldValue = this.inputRef.value.value;
+    }
+
+    protected override firstUpdated(_changedProperties: Map<string | number | symbol, unknown>): void {
+        this._oldValue = this.value;
     }
 
     override render() {
