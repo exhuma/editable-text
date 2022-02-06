@@ -1,0 +1,20 @@
+{
+  "name": "editable-text",
+  "version": "1.0.0",
+  "description": "A simple component to make a text-value editable",
+  "main": "dist/editable-text.js",
+  "type": "module",
+  "scripts": {
+    "serve": "web-dev-server",
+    "build": "tsc"
+  },
+  "author": "Michel Albert <michel@albert.lu>",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^2.1.2"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.29",
+    "typescript": "^4.5.5"
+  }
+}
